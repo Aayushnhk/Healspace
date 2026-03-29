@@ -3,108 +3,104 @@ import Navbar from '@/components/Navbar'
 
 export default function Home() {
   return (
-    <main>
+    <main style={{ fontFamily: 'Georgia, serif', background: '#0a0a0b', color: '#e2ddd6', minHeight: '100vh' }}>
       <Navbar />
 
-      {/* Orbs */}
-      <div style={{
-        position: 'fixed', width: '400px', height: '400px',
-        borderRadius: '50%', filter: 'blur(80px)', pointerEvents: 'none',
-        background: 'rgba(201,169,110,0.06)', top: '-100px', right: '-100px', zIndex: 0,
-      }} />
-      <div style={{
-        position: 'fixed', width: '300px', height: '300px',
-        borderRadius: '50%', filter: 'blur(80px)', pointerEvents: 'none',
-        background: 'rgba(143,168,200,0.05)', bottom: '100px', left: '-80px', zIndex: 0,
-      }} />
-
       {/* Hero */}
-      <section style={{
-        minHeight: 'calc(100vh - 73px)',
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center',
-        textAlign: 'center', padding: '4rem 2rem',
-        position: 'relative', zIndex: 1,
-      }}>
-        <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: '6px',
-          background: 'rgba(201,169,110,0.1)', border: '1px solid rgba(201,169,110,0.2)',
-          color: 'var(--accent)', fontSize: '0.75rem', padding: '0.35rem 0.9rem',
-          borderRadius: '100px', marginBottom: '2rem', letterSpacing: '0.05em',
-        }}>✦ a safe space to feel</div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '88vh', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
 
-        <h1 style={{
-          fontFamily: 'var(--font-lora)',
-          fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
-          fontWeight: 400, lineHeight: 1.2,
-          maxWidth: '700px', marginBottom: '1.5rem',
-        }}>
-          You don{"'"}t have to carry this{' '}
-          <em style={{ color: 'var(--accent)' }}>alone</em>
-        </h1>
-
-        <p style={{
-          fontSize: '1rem', color: 'var(--muted)',
-          maxWidth: '480px', lineHeight: 1.7,
-          marginBottom: '3rem', fontWeight: 300,
-        }}>
-          HealSpace is a quiet corner of the internet for people going through
-          heartbreak, loss, or pain. Vent anonymously, feel heard, and know
-          others have survived this too.
-        </p>
-
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <Link href="/vent" style={{
-            background: 'var(--accent)', color: '#1a1208',
-            fontSize: '0.9rem', fontWeight: 500,
-            padding: '0.8rem 2rem', borderRadius: '100px',
-            textDecoration: 'none',
-          }}>write what you feel</Link>
-
-          <Link href="/stories" style={{
-            background: 'transparent', color: 'var(--text)',
-            fontSize: '0.9rem', padding: '0.8rem 2rem',
-            borderRadius: '100px', border: '1px solid var(--border)',
-            textDecoration: 'none',
-          }}>read survival stories</Link>
+        {/* Left */}
+        <div style={{ padding: '5rem 3rem 4rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+          <div>
+            <div style={{ fontFamily: 'system-ui,sans-serif', fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6b6860', marginBottom: '3rem' }}>
+              a safe space to feel
+            </div>
+            <h1 style={{ fontSize: 'clamp(2.8rem,4.5vw,4.2rem)', fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em', color: '#e2ddd6' }}>
+              You don{"'"}t have<br />to carry this<br />
+              <em style={{ color: '#c9a96e', fontStyle: 'italic' }}>alone.</em>
+            </h1>
+            <p style={{ fontFamily: 'system-ui,sans-serif', fontSize: '0.88rem', color: '#6b6860', lineHeight: 1.7, maxWidth: '380px', marginTop: '2rem' }}>
+              A quiet place for people going through heartbreak, grief, and loss. Vent anonymously. Feel heard. Know that others have survived this too.
+            </p>
+            <div style={{ display: 'flex', gap: '1.5rem', marginTop: '3rem', alignItems: 'center' }}>
+              <Link href="/vent" style={{
+                fontFamily: 'system-ui,sans-serif', fontSize: '0.75rem', letterSpacing: '0.08em',
+                textTransform: 'uppercase', background: '#c9a96e', color: '#0a0a0b',
+                padding: '0.75rem 2rem', textDecoration: 'none', display: 'inline-block',
+              }}>
+                write what you feel
+              </Link>
+              <Link href="/stories" style={{
+                fontFamily: 'system-ui,sans-serif', fontSize: '0.75rem', letterSpacing: '0.08em',
+                textTransform: 'uppercase', color: '#6b6860', textDecoration: 'none',
+              }}>
+                survival stories →
+              </Link>
+            </div>
+          </div>
+          <div style={{ fontFamily: 'system-ui,sans-serif', fontSize: '0.7rem', color: '#3a3835', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+            Anonymous · No account needed · Not saved
+          </div>
         </div>
-      </section>
 
-      {/* Cards */}
-      <section style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-        gap: '1rem', padding: '0 2rem 5rem',
-        maxWidth: '1000px', margin: '0 auto',
-        position: 'relative', zIndex: 1,
-      }}>
+        {/* Right */}
+        <div style={{ padding: '5rem 3rem 4rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '2.5rem' }}>
+          {[
+            { quote: '"The wound is the place where the light enters you."', cite: '— Rumi' },
+            { quote: '"I kept reaching for my phone to text them before I remembered. It\'s the smallest moments that hit the hardest."', cite: '— anonymous, 2 hours ago' },
+            { quote: '"Everyone keeps telling me I\'ll be fine. I just need someone to say it\'s okay to not be fine right now."', cite: '— anonymous, yesterday' },
+          ].map((q, i) => (
+            <div key={i} style={{ paddingLeft: '1.5rem', borderLeft: '1px solid rgba(201,169,110,0.3)' }}>
+              <blockquote style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#a8a49e', fontStyle: 'italic' }}>{q.quote}</blockquote>
+              <cite style={{ fontFamily: 'system-ui,sans-serif', fontSize: '0.7rem', color: '#6b6860', letterSpacing: '0.06em', textTransform: 'uppercase', marginTop: '0.6rem', display: 'block', fontStyle: 'normal' }}>{q.cite}</cite>
+            </div>
+          ))}
+
+          <div style={{ display: 'flex', gap: '3rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+            {[
+              { num: '2,847', label: 'vents this week' },
+              { num: '94%', label: 'felt less alone' },
+              { num: '∞', label: 'judgment free' },
+            ].map((s, i) => (
+              <div key={i}>
+                <div style={{ fontSize: '2rem', color: '#c9a96e', fontWeight: 400 }}>{s.num}</div>
+                <div style={{ fontFamily: 'system-ui,sans-serif', fontSize: '0.68rem', color: '#6b6860', letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: '0.2rem' }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Features grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
         {[
-          { icon: '🕊', title: 'anonymous venting', desc: "No account needed. Say everything you've been holding inside without judgment." },
-          { icon: '🤍', title: 'AI that listens', desc: "Not advice. Not toxic positivity. Just genuine acknowledgment of what you're feeling." },
-          { icon: '🌱', title: 'survival stories', desc: 'Real people who made it through. Proof that this pain is survivable.' },
-          { icon: '📅', title: 'daily check-ins', desc: 'Track how you are feeling over time. Small steps forward still count.' },
-        ].map((card) => (
-          <div key={card.title} style={{
-            background: 'var(--surface)',
-            border: '1px solid var(--border)',
-            borderRadius: 'var(--radius)',
-            padding: '1.5rem',
+          { num: '01', title: 'Anonymous venting', desc: "No account. No name. Say everything you've been holding inside." },
+          { num: '02', title: 'AI that listens', desc: 'Not advice. Not toxic positivity. Just genuine acknowledgment of what you feel.' },
+          { num: '03', title: 'Survival stories', desc: 'Real people who made it through. Proof this pain is survivable.' },
+          { num: '04', title: 'Daily check-ins', desc: 'Track how you feel over time. Small steps forward still count.' },
+        ].map((f, i) => (
+          <div key={i} style={{
+            padding: '2.5rem 2rem',
+            borderRight: i < 3 ? '1px solid rgba(255,255,255,0.06)' : 'none',
           }}>
-            <div style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{card.icon}</div>
-            <h3 style={{ fontSize: '0.95rem', fontWeight: 500, marginBottom: '0.5rem' }}>{card.title}</h3>
-            <p style={{ fontSize: '0.82rem', color: 'var(--muted)', lineHeight: 1.6 }}>{card.desc}</p>
+            <div style={{ fontFamily: 'system-ui,sans-serif', fontSize: '0.65rem', color: '#6b6860', letterSpacing: '0.1em', marginBottom: '1.5rem' }}>{f.num}</div>
+            <div style={{ fontSize: '1.1rem', color: '#e2ddd6', marginBottom: '0.8rem', fontWeight: 400 }}>{f.title}</div>
+            <div style={{ fontFamily: 'system-ui,sans-serif', fontSize: '0.78rem', color: '#6b6860', lineHeight: 1.6 }}>{f.desc}</div>
           </div>
         ))}
-      </section>
+      </div>
 
-      {/* Quote */}
-      <div style={{
-        textAlign: 'center', padding: '3rem 2rem 5rem',
-        fontFamily: 'var(--font-lora)', fontStyle: 'italic',
-        color: 'var(--muted)', fontSize: '0.9rem',
-        position: 'relative', zIndex: 1,
-      }}>
-        "The wound is the place where the light enters you." — Rumi
+      {/* Bottom strip */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '2rem 3rem', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        <p style={{ fontSize: '0.9rem', color: '#6b6860', fontStyle: 'italic', maxWidth: '500px' }}>
+          "This feeling is temporary. You have survived every hard day so far. This one too will pass."
+        </p>
+        <Link href="/vent" style={{
+          fontFamily: 'system-ui,sans-serif', fontSize: '0.72rem', letterSpacing: '0.1em',
+          textTransform: 'uppercase', color: '#c9a96e', textDecoration: 'none',
+        }}>
+          start healing →
+        </Link>
       </div>
     </main>
   )
