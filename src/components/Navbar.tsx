@@ -2,9 +2,11 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useSession, signOut } from '@/lib/auth-client'
 
 export default function Navbar() {
   const pathname = usePathname()
+  const { data: session } = useSession()
 
   const links = [
     { href: '/vent', label: 'vent' },
@@ -46,16 +48,23 @@ export default function Navbar() {
           }}>{label}</Link>
         ))}
 
-        <Link href="/vent" style={{
-          fontFamily: 'system-ui,sans-serif',
-          fontSize: '0.72rem',
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          background: '#c9a96e',
-          color: '#0a0a0b',
-          padding: '0.5rem 1.3rem',
-          textDecoration: 'none',
-        }}>start healing</Link>
+        {session ? (
+          <button onClick={() => signOut()} style={{
+            fontFamily: 'system-ui,sans-serif',
+            fontSize: '0.72rem', letterSpacing: '0.08em',
+            textTransform: 'uppercase', background: 'transparent',
+            color: '#6b6860', padding: '0.5rem 1.3rem',
+            border: '1px solid rgba(255,255,255,0.08)', cursor: 'pointer',
+          }}>sign out</button>
+        ) : (
+          <Link href="/login" style={{
+            fontFamily: 'system-ui,sans-serif',
+            fontSize: '0.72rem', letterSpacing: '0.08em',
+            textTransform: 'uppercase', background: '#c9a96e',
+            color: '#0a0a0b', padding: '0.5rem 1.3rem',
+            textDecoration: 'none',
+          }}>sign in</Link>
+        )}
       </div>
     </nav>
   )
