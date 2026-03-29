@@ -35,7 +35,7 @@ export default function LoginPage() {
     await signIn.social({ provider: 'google' })
   }
 
-  const inputStyle = {
+  const inputStyle: React.CSSProperties = {
     width: '100%',
     background: '#0f0f10',
     border: '1px solid rgba(255,255,255,0.08)',
@@ -51,17 +51,17 @@ export default function LoginPage() {
     <main style={{ background: '#0a0a0b', minHeight: '100vh', color: '#e2ddd6' }}>
       <Navbar />
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'calc(100vh - 65px)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', minHeight: 'calc(100vh - 65px)' }}>
 
         {/* Left — form */}
-        <div style={{ padding: '5rem 4rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
-          <div style={{ maxWidth: '360px' }}>
+        <div style={{ padding: 'clamp(2.5rem,6vw,5rem) clamp(1.5rem,5vw,4rem)', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+          <div style={{ maxWidth: '360px', width: '100%' }}>
 
             <div style={{ fontFamily: 'system-ui,sans-serif', fontSize: '0.68rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6b6860', marginBottom: '1rem' }}>
               {mode === 'login' ? 'welcome back' : 'join healspace'}
             </div>
-            <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2.2rem', fontWeight: 400, marginBottom: '2.5rem', lineHeight: 1.2 }}>
-              {mode === 'login' ? 'sign in to\nyour space' : 'create your\nsafe space'}
+            <h2 style={{ fontFamily: 'Georgia,serif', fontSize: 'clamp(1.8rem,4vw,2.2rem)', fontWeight: 400, marginBottom: '2.5rem', lineHeight: 1.2 }}>
+              {mode === 'login' ? 'sign in to your space' : 'create your safe space'}
             </h2>
 
             {/* Google button */}
@@ -90,29 +90,12 @@ export default function LoginPage() {
             </div>
 
             {mode === 'signup' && (
-              <input
-                value={name}
-                onChange={e => setName(e.target.value)}
-                placeholder="your name"
-                style={inputStyle}
-              />
+              <input value={name} onChange={e => setName(e.target.value)} placeholder="your name" style={inputStyle} />
             )}
 
-            <input
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              placeholder="email address"
-              type="email"
-              style={inputStyle}
-            />
+            <input value={email} onChange={e => setEmail(e.target.value)} placeholder="email address" type="email" style={inputStyle} />
 
-            <input
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              placeholder="password"
-              type="password"
-              style={{ ...inputStyle, marginBottom: '1.5rem' }}
-            />
+            <input value={password} onChange={e => setPassword(e.target.value)} placeholder="password" type="password" style={{ ...inputStyle, marginBottom: '1.5rem' }} />
 
             {error && (
               <div style={{ fontFamily: 'system-ui,sans-serif', fontSize: '0.78rem', color: '#c4746c', marginBottom: '1rem', paddingLeft: '1rem', borderLeft: '2px solid #c4746c' }}>
@@ -134,8 +117,7 @@ export default function LoginPage() {
             <div style={{ textAlign: 'center' }}>
               <button onClick={() => { setMode(mode === 'login' ? 'signup' : 'login'); setError('') }} style={{
                 background: 'none', border: 'none', cursor: 'pointer',
-                fontFamily: 'system-ui,sans-serif', fontSize: '0.78rem',
-                color: '#6b6860',
+                fontFamily: 'system-ui,sans-serif', fontSize: '0.78rem', color: '#6b6860',
               }}>
                 {mode === 'login' ? "don't have an account? sign up →" : 'already have an account? sign in →'}
               </button>
@@ -143,8 +125,8 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Right — quotes */}
-        <div style={{ padding: '5rem 4rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '2.5rem' }}>
+        {/* Right — quotes, hidden on mobile */}
+        <div style={{ padding: 'clamp(2.5rem,6vw,5rem) clamp(1.5rem,5vw,4rem)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '2.5rem' }} className="login-quotes">
           {[
             { quote: '"I thought I wouldn\'t survive the first month. Eighteen months later, I am the happiest I have ever been."', cite: '— anonymous, 28' },
             { quote: '"The grief was real. So was the growth. I journaled every day and one day I read back and realized I had changed."', cite: '— anonymous, 24' },
@@ -157,6 +139,12 @@ export default function LoginPage() {
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .login-quotes { display: none !important; }
+        }
+      `}</style>
     </main>
   )
 }
