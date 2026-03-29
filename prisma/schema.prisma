@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Vent {
+  id        String   @id @default(cuid())
+  content   String
+  mood      String?
+  createdAt DateTime @default(now())
+  replies   Reply[]
+}
+
+model Reply {
+  id        String   @id @default(cuid())
+  content   String
+  isAI      Boolean  @default(false)
+  ventId    String
+  vent      Vent     @relation(fields: [ventId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model SurvivalStory {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  age       Int?
+  createdAt DateTime @default(now())
+}
+
+model DailyCheckIn {
+  id        String   @id @default(cuid())
+  mood      String
+  note      String?
+  createdAt DateTime @default(now())
+}
