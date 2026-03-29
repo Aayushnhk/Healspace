@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Navbar from '@/components/Navbar'
+import { useSession } from '@/lib/auth-client'
 
 const moods = [
   { label: 'heartbroken' },
@@ -19,6 +20,7 @@ const recentVents = [
 ]
 
 export default function VentPage() {
+  const { data: session } = useSession()
   const [selectedMoods, setSelectedMoods] = useState<string[]>([])
   const [ventText, setVentText] = useState('')
   const [aiReply, setAiReply] = useState('')
@@ -55,13 +57,13 @@ export default function VentPage() {
   return (
     <main style={{ background: '#0a0a0b', minHeight: '100vh', color: '#e2ddd6' }}>
       <Navbar />
-      <div style={{ maxWidth: '680px', margin: '0 auto', padding: '4rem 2rem 6rem' }}>
+      <div style={{ maxWidth: '680px', margin: '0 auto', padding: 'clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,2rem) 6rem' }}>
 
         <div style={{ marginBottom: '3rem', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '2rem' }}>
           <div style={{ fontFamily: 'system-ui,sans-serif', fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6b6860', marginBottom: '1rem' }}>
-            anonymous · not saved · no judgment
+            {session ? `writing as ${session.user.name || session.user.email}` : 'anonymous · not saved · no judgment'}
           </div>
-          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: '2.2rem', fontWeight: 400, lineHeight: 1.2, color: '#e2ddd6' }}>
+          <h2 style={{ fontFamily: 'Georgia,serif', fontSize: 'clamp(1.8rem,4vw,2.2rem)', fontWeight: 400, lineHeight: 1.2, color: '#e2ddd6' }}>
             what's on your mind?
           </h2>
         </div>
@@ -111,10 +113,11 @@ export default function VentPage() {
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.06)',
+            flexWrap: 'wrap', gap: '0.8rem',
           }}>
             <div style={{ fontFamily: 'system-ui,sans-serif', fontSize: '0.68rem', color: '#3a3835', letterSpacing: '0.06em', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#4caf86', display: 'inline-block' }} />
-              anonymous · not saved
+              <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: session ? '#c9a96e' : '#4caf86', display: 'inline-block' }} />
+              {session ? `saved to your account · ${session.user.name || session.user.email}` : 'anonymous · not saved'}
             </div>
             <button onClick={handleSend} disabled={loading} style={{
               background: '#c9a96e', color: '#0a0a0b',
@@ -127,6 +130,18 @@ export default function VentPage() {
             </button>
           </div>
         </div>
+
+        {/* Sign in prompt for anonymous users */}
+        {!session && (
+          <div style={{
+            fontFamily: 'system-ui,sans-serif', fontSize: '0.72rem',
+            color: '#6b6860', marginBottom: '2rem',
+            display: 'flex', alignItems: 'center', gap: '0.5rem',
+          }}>
+            want to track your journey over time?
+            <a href="/login" style={{ color: '#c9a96e', textDecoration: 'none', letterSpacing: '0.04em' }}>sign in →</a>
+          </div>
+        )}
 
         {/* AI Reply */}
         {submitted && (
